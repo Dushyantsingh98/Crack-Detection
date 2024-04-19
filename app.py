@@ -7,23 +7,8 @@ from io import BytesIO
 app = Flask(__name__)
 app.secret_key = 'your_secret_key_here'
 
-
-MODEL_URL = 'https://github.com/Dushyantsingh98/Crack-Detection/blob/main/saved_model.pb'
-
-# Function to download the model from the provided URL
-def download_model(url):
-    response = requests.get(url)
-    if response.status_code == 200:
-        return response.content
-    else:
-        raise Exception("Failed to download the model")
-
-# Load the model from the GitHub repository
-def load_model_from_github(url):
-    model_data = download_model(url)
-    return tf.saved_model.load_from_string(model_data)
-
-model = load_model_from_github(MODEL_URL)
+MODEL_PATH = 'saved_model.pb'
+model = tf.saved_model.load(MODEL_PATH)
 
 @app.route('/', methods=['GET'])
 def home():
