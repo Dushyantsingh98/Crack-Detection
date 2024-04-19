@@ -7,7 +7,7 @@ from io import BytesIO
 app = Flask(__name__)
 app.secret_key = 'your_secret_key_here'
 
-MODEL_PATH = 'models/saved_model.pb'
+MODEL_PATH = 'models'
 model = tf.saved_model.load(MODEL_PATH)
 
 @app.route('/', methods=['GET'])
